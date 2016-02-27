@@ -15,37 +15,43 @@
 piWebApiApp.factory('piWebApiHttpService', ['$http', '$q', function ($http, $q) {
 
     //This factory method works like a service in which all HTTP requests are made.
-    var serviceBase = 'https://marc-web-sql.marc.net/piwebapi/';
 
     //Set withCredentials = true; if you need to type your credentais.
     $http.defaults.withCredentials = true;
+
     var piWebApiHttpServiceFactory = {};
-    piWebApiHttpServiceFactory.validPIServerName = function (piServerName) {
+
+    piWebApiHttpServiceFactory.validPIServerName = function (serviceBase, piServerName) {
         return $http.get(serviceBase + "dataservers?name=" + piServerName).then(function (response) {
             return response;
         });
     };
 
-    piWebApiHttpServiceFactory.validPIPointName = function (piServerName, piPointName) {
+    piWebApiHttpServiceFactory.validPIPointName = function (serviceBase, piServerName, piPointName) {
         return $http.get(serviceBase + "points?path=\\\\" + piServerName + "\\" + piPointName).then(function (response) {
             return response;
         });
     };
 
-    piWebApiHttpServiceFactory.getSnapshotValue = function (webId) {
+    piWebApiHttpServiceFactory.getSnapshotValue = function (serviceBase, webId) {
         return $http.get(serviceBase + 'streams/' + webId + '/value').then(function (response) {
             return response;
         });
     };
 
-    piWebApiHttpServiceFactory.getRecordedValues = function (webId, startTime, endTime) {
+    piWebApiHttpServiceFactory.getRecordedValues = function (serviceBase, webId, startTime, endTime) {
         return $http.get(serviceBase + 'streams/' + webId + '/recorded?starttime=' + startTime + '&endtime=' + endTime).then(function (response) {
             return response;
         });
     };
 
-    piWebApiHttpServiceFactory.getInterpolatedValues = function (webId, startTime, endTime, interval) {
+    piWebApiHttpServiceFactory.getInterpolatedValues = function (serviceBase, webId, startTime, endTime, interval) {
         return $http.get(serviceBase + 'streams/' + webId + '/interpolated?starttime=' + startTime + '&endtime=' + endTime + "&interval=" + interval).then(function (response) {
+            return response;
+        });
+    };
+    piWebApiHttpServiceFactory.getCorsValues = function (serviceBase) {
+        return $http.get(serviceBase + '/system/configuration').then(function (response) {
             return response;
         });
     };
