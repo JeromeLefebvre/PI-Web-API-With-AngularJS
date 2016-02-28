@@ -68,8 +68,7 @@
     </div>
     <!--After running $scope.getData(), $scope.requestMode will become equal to false. As a result the second div will be shown-->
     <div ng-show="requestMode != true">
-        <h1>Displaying SINUSOID data</h1>
-
+        <h1>Displaying {{piPointName}} data</h1>
         <h2>Connection information</h2>
         <br />
         <table border="0" style="width: 20em; border: 1px solid #666;">
@@ -77,11 +76,11 @@
                 <th>Property</th>
                 <th>Value</th>
             </tr>
-
             <tr>
                 <td>PI Server</td>
                 <!--Using { {} } also binds the DOM with variables declared under $scope-->
-                <td id="PIServerNameValue">{{piServerName}}</td>
+                <td id="PIServerNameValue">{{piServerName
+}}</td>
             </tr>
             <tr>
                 <td>PI Point</td>
@@ -138,7 +137,7 @@
         </div>
         <!--The div below will appear if a webId is found and if the user has selected to get the snapshot on the previous screen-->
         <div ng-show="getSnap.value == true && webId != null">
-            <h2 class="snapshot">Snapshot Value of Sinusoid</h2>
+            <h2 class="snapshot">Snapshot Value of {{piPointName}}</h2>
             <br />
             <table class="snapshot" border="0" style="width: 20em; border: 1px solid #666;">
                 <tr>
@@ -155,7 +154,7 @@
         <br />
 
         <div ng-show="getRec.value == true && webId != null">
-            <h2 class="recorded">Recorded Values of Sinusoid</h2>
+            <h2 class="recorded">Recorded Values of {{piPointName}}</h2>
             <br />
             <table class="recorded" border="0" style="width: 20em; border: 1px solid #666;">
                 <tr>
@@ -173,7 +172,7 @@
         <br />
         <br />
         <div ng-show="getInt.value == true && webId != null">
-            <h2 class="interpolated">Interpolated Values of Sinusoid</h2>
+            <h2 class="interpolated">Interpolated Values of {{piPointName}}</h2>
             <br />
             <table class="interpolated" border="0" style="width: 20em; border: 1px solid #666;">
                 <tr>
